@@ -44,7 +44,7 @@ const server = http.createServer(app);
 // Save the errorHandler function in the server
 server.on('error', errorHandler);
 
-// Event listener logging the port the server is running on in the console
+// Event listener logging the port the server is running on in the console 
 server.on('listening', () => {
   const address = server.address();
   const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + port;
