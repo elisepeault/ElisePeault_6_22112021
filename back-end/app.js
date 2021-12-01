@@ -1,6 +1,7 @@
 // IMPORT
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 // IMPORT routers
 //const saucesRoutes = require('./routes/sauces');
@@ -27,21 +28,15 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(bodyParser.json());
+
 // SAVE THE ROUTES (Shows for each route => the according router (imported above))
 //app.use('/api/sauces', saucesRoutes); 
 app.use('/api/auth', userRoutes);
 
-app.use((req, res, next) => {   // TEST POSTMAN 
-    res.status(201);
-    next();
-  });
 
-app.use((req, res, next) => {   // TEST POSTMAN
-    res.json({ message: 'Votre requête a bien été reçue !' }); 
-    next();
- });
  
- // // GET => Returns an array of all the sauces in the database
+// TEST GET => Returns an array of all the sauces in the database
 // app.get('/api/sauces', (req, res, next) => {
 //   const sauces = [
 //     {
