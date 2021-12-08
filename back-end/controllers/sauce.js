@@ -2,7 +2,7 @@
 const Sauce = require('../models/Sauce');
 
 // IMPORT the package file system (node) Allows to modify file systems, delete files...
-//const fs = require('fs');
+const fs = require('fs');
 
 
 // Export the function that creates a sauce object
@@ -22,6 +22,34 @@ exports.createSauce = (req, res, next) => {
         .then(() => res.status(201).json({ message: 'Sauce enregistrée !'})) // Return a response to the frontend => it prevents the request from expiring
         .catch(error => res.status(400).json({ error }));   // error is a shortcut for : " error: error "
 };
+
+
+// Modify a sauce object
+exports.modifySauce = (req, res, next) => {
+    const sauceObject = req.file ?
+    {
+        ...JSON.parse(req.body.sauce),
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    } : { ...req.body };
+    Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id }) // 1st argument : modified object (_id) // 2nd argument : new object
+      .then(() => res.status(200).json({ message: 'Sauce modifiée !'}))
+      .catch(error => res.status(400).json({ error }));
+};
+
+
+// Delete a sauce object
+// exports.deleteThing = (req, res, next) => {
+//     Sauce.findOne({ _id: req.params.id })
+//     .then(sauce => {
+//         const filename = sauce.imageUrl.split('/images/')[1];
+//         fs.unlink(`images/${filename}`, () => {
+//             Sauce.deleteOne({ _id: req.params.id }) 
+//             .then(() => res.status(200).json({ message: 'Sauce supprimée !'}))
+//             .catch(error => res.status(400).json({ error })); 
+//         });
+//     })
+//     .catch (error => res.status(500).json({ error }));
+// };
 
 
 // Export the function that displays all sauces
