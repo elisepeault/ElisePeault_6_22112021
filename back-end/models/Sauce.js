@@ -12,8 +12,8 @@ const sauceSchema = mongoose.Schema({
     heat: { type: Number, required: true },
     likes: { type: Number, required: true },
     dislikes: { type: Number, required: true },
-    usersLiked: { type: ["String <userId>"], required: true },      // NORMAL ???
-    usersDisliked: { type: ["String <userId>"], required: true },   // NORMAL ???
+    usersLiked: { type: Array, required: true },      // Array  =>  ["String <userId>"] Changer ? 
+    usersDisliked: { type: Array, required: true },   // Array  =>  ["String <userId>"] 
   });
   
   // Export the schema => in a model form
