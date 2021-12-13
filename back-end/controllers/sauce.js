@@ -51,6 +51,10 @@ exports.deleteSauce = (req, res, next) => {
     .catch (error => res.status(500).json({ error }));
 };
 
+exports.updateLikes = (req, res, next) => {
+
+};
+
 
 // Export the function that displays all sauces
 exports.getAllSauces = (req, res, next) => {
