@@ -14,7 +14,7 @@ exports.signup = (req, res, next) => {
                 password: hash
             });
             user.save()  // Save the user in the database
-                .then( () => res.status(201).json({ message: 'Utilisateur créé !'}))
+                .then( () => res.status(201).json({ message: 'User created !'}))
                 .catch(error => res.status(400).json({ error }));
         })
         .catch(error => res.status(500).json({ error }));
@@ -25,12 +25,12 @@ exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email})
         .then( user => {     // check if a user is found
             if (!user) {     // If no user is found
-                return res.status(401).json({ error: 'Utilisateur non trouvé !'});
+                return res.status(401).json({ error: 'User not found !'});
             }         
             bcrypt.compare(req.body.password, user.password) // If we find a user => we compare the password (in the request) with the hash saved in the database 
                 .then(valid => {
                     if(!valid) {
-                        return res.status(401).json({ error: 'Mot de passe incorrect !'});
+                        return res.status(401).json({ error: 'Incorrect password !'});
                     }
                     res.status(200).json({
                         userId: user._id,

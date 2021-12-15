@@ -15,8 +15,8 @@ const app = express();
 mongoose.connect('mongodb+srv://Elise:Noob28Bun@cluster0.dyo6b.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
   { useNewUrlParser: true,
     useUnifiedTopology: true })
-  .then(() => console.log('Connexion à MongoDB réussie !'))
-  .catch(() => console.log('Connexion à MongoDB échouée !'));
+  .then(() => console.log('Connection to MongoDB succeed !'))
+  .catch(() => console.log('Connection to MongoDB failed !'));
 
 
 // REQUESTS's RESPONSES

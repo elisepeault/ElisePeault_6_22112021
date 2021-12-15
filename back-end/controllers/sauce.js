@@ -35,7 +35,7 @@ exports.createSauce = (req, res, next) => {
     });
     // Save the sauce object in the database & return a promise
     sauce.save()
-        .then(() => res.status(201).json({ message: 'Sauce enregistrée !'})) // Return a response to the frontend => it prevents the request from expiring
+        .then(() => res.status(201).json({ message: 'Sauce registered !'})) // Return a response to the frontend => it prevents the request from expiring
         .catch(error => res.status(400).json({ error }));   // error is a shortcut for : " error: error "
 };
 
@@ -48,7 +48,7 @@ exports.modifySauce = (req, res, next) => {
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     } : { ...req.body };
     Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id }) // 1st argument : modified object (_id) // 2nd argument : new object
-      .then(() => res.status(200).json({ message: 'Sauce modifiée !'}))
+      .then(() => res.status(200).json({ message: 'Sauce modified !'}))
       .catch(error => res.status(400).json({ error }));
 };
 
@@ -60,7 +60,7 @@ exports.deleteSauce = (req, res, next) => {
         const filename = sauce.imageUrl.split('/images/')[1];
         fs.unlink(`images/${filename}`, () => {
             Sauce.deleteOne({ _id: req.params.id }) 
-            .then(() => res.status(200).json({ message: 'Sauce supprimée !'}))
+            .then(() => res.status(200).json({ message: 'Sauce deleted !'}))
             .catch(error => res.status(400).json({ error })); 
         });
     })
@@ -80,9 +80,8 @@ exports.updateLikesDislikes = (req, res, next) => {
                 { _id: sauceId },  // Defines the id of the sauce we want to like
                 { $push: { usersLiked: userId }, // push the userId in the usersLiked array  ($push => mongoDB operator)
                 $inc: { likes: +1 }  })  // increment the likes number
-              .then(() => res.status(200).json({ message: `Like ajouté` }))
-              .catch((error) => res.status(400).json({ error }))
-                
+              .then(() => res.status(200).json({ message: `Like added` }))
+              .catch((error) => res.status(400).json({ error }))      
           break;
     
         case 0 :  // to delete a like / dislike
@@ -94,7 +93,7 @@ exports.updateLikesDislikes = (req, res, next) => {
                       { _id: sauceId }, // Defines the id of the sauce for which we want to remove the like
                       { $pull: { usersLiked: userId }, // remove the userId in the usersLiked array
                       $inc: { likes: -1 }  }) // decrement the likes number
-                    .then(() => res.status(200).json({ message: `Like retiré` }))
+                    .then(() => res.status(200).json({ message: `Like removed` }))
                     .catch((error) => res.status(400).json({ error }))
                 }
                 // to delete a dislike
@@ -103,7 +102,7 @@ exports.updateLikesDislikes = (req, res, next) => {
                       { _id: sauceId }, // Defines the id of the sauce for which we want to remove the dislike
                       { $pull: { usersDisliked: userId }, // remove the userId in the usersDisliked array
                       $inc: { dislikes: -1 }  })  // decrement the dislikes number
-                    .then(() => res.status(200).json({ message: `Dislike retiré` }))
+                    .then(() => res.status(200).json({ message: `Dislike removed` }))
                     .catch((error) => res.status(400).json({ error }))
                 }
               })
@@ -115,12 +114,11 @@ exports.updateLikesDislikes = (req, res, next) => {
                 { _id: sauceId }, // Defines the id of the sauce we want to dislike
                 { $push: { usersDisliked: userId }, // push the userId in the usersDisliked array
                 $inc: { dislikes: +1 }  })  // increment the dislikes number
-              .then(() => { res.status(200).json({ message: `Dislike ajouté` }) })
+              .then(() => { res.status(200).json({ message: `Dislike added` }) })
               .catch((error) => res.status(400).json({ error }))
           break;
           
           default:
             console.log(error);
       }
-
 };
