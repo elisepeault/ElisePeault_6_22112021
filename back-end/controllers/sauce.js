@@ -15,7 +15,7 @@ exports.getAllSauces = (req, res, next) => {
 
 // Get details for one sauce object with its id
 exports.getOneSauce = (req, res, next) => {
-    Sauce.findOne({ _id: req.params.id })
+    Sauce.findById(req.params.id)
       .then(sauce => res.status(200).json(sauce))
       .catch(error => res.status(404).json({ error }));
   }
@@ -55,7 +55,7 @@ exports.modifySauce = (req, res, next) => {
 
 // Delete a sauce object
 exports.deleteSauce = (req, res, next) => {
-    Sauce.findOne({ _id: req.params.id })
+    Sauce.findById(req.params.id)
     .then(sauce => {
         const filename = sauce.imageUrl.split('/images/')[1];
         fs.unlink(`images/${filename}`, () => {
@@ -85,7 +85,7 @@ exports.updateLikesDislikes = (req, res, next) => {
           break;
     
         case 0 :  // to delete a like / dislike
-            Sauce.findOne({ _id: sauceId })
+            Sauce.findById(sauceId)
                .then((sauce) => {
                 // to delete a like
                 if (sauce.usersLiked.includes(userId)) {    // Determine if the array "usersLiked" (of a specific sauce) contains the value "userId"
