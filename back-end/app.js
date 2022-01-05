@@ -3,6 +3,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');  //node
+require('dotenv').config();
+
+console.log(process.env);
 
 // IMPORT routers
 const sauceRoutes = require('./routes/sauce');
@@ -12,7 +15,7 @@ const userRoutes = require('./routes/user');
 const app = express();
 
 // Use of Mongoose to connect to Mongo DB 
-mongoose.connect('mongodb+srv://Elise:Noob28Bun@cluster0.dyo6b.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+mongoose.connect( process.env.SECRET_MONGODB,  
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connection to MongoDB succeed !'))

@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 // IMPORT the user model (Because we will need to save and read users in this middleware)
 const User = require('../models/User');
 
+require('dotenv').config();
+
 // REGISTRATION of new users
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10) // Hash the password. 2 elements : password in the request body & salt (we run the hash algorithm 10 times).
@@ -36,7 +38,7 @@ exports.login = (req, res, next) => {
                         userId: user._id,
                         token: jwt.sign(   // jsonwebtoken function
                             { userId: user._id },   // Data to encode (in the token)
-                            'RANDOM_TOKEN_SECRET',    // Secret key
+                            process.env.SECRET_TOKEN,    // Secret key
                             { expiresIn: '24h'} 
                         )
                     });
