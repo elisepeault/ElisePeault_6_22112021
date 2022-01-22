@@ -5,7 +5,7 @@ const Sauce = require('../models/Sauce');
 const fs = require('fs');
 
 
-// Export the function that displays all sauces
+// Exports the function that displays all sauces
 exports.getAllSauces = (req, res, next) => {
     Sauce.find()  
     .then(sauces => res.status(200).json(sauces))
@@ -13,7 +13,7 @@ exports.getAllSauces = (req, res, next) => {
 };
 
 
-// Get details for one sauce object with its id
+// Exports the function that gets details for one sauce object with its id
 exports.getOneSauce = (req, res, next) => {
     Sauce.findById(req.params.id)
       .then(sauce => res.status(200).json(sauce))
@@ -21,7 +21,7 @@ exports.getOneSauce = (req, res, next) => {
   }
 
 
-// Export the function that creates a sauce object
+// Exports the function that creates a sauce object
 exports.createSauce = (req, res, next) => {
     const sauceObject = JSON.parse(req.body.sauce);
     delete req.body._id; // The frontend generate an id => delete the field because we don't need it
@@ -40,7 +40,7 @@ exports.createSauce = (req, res, next) => {
 };
 
 
-// Modify a sauce object
+// Exports the function that modifies a sauce object
 exports.modifySauce = (req, res, next) => {
     const sauceObject = req.file ?
     {
@@ -53,7 +53,7 @@ exports.modifySauce = (req, res, next) => {
 };
 
 
-// Delete a sauce object
+// Exports the function that deletes a sauce object
 exports.deleteSauce = (req, res, next) => {
     Sauce.findById(req.params.id)
     .then(sauce => {
@@ -67,7 +67,7 @@ exports.deleteSauce = (req, res, next) => {
     .catch (error => res.status(500).json({ error }));
 };
 
-// Add or delete a like/dislike for a sauce
+// Exports the function that adds or deletes a like/dislike for a sauce
 exports.updateLikesDislikes = (req, res, next) => {
     let like = req.body.like;
     let userId = req.body.userId;

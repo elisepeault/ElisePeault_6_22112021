@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 // The json function is defined as the global middleware of this app
 app.use(bodyParser.json());
 
-// Création d'un middleware qui va répondre aux requêtes envoyées à /images et qui serve le dossier statique images grâce à express 
+// Creation of a middleware that will respond to requests sent to /images and that serves the static images folder using express  
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // SAVE THE ROUTES (Shows for each route => the according router (imported above))

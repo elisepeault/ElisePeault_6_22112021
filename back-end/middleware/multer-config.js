@@ -1,4 +1,4 @@
-// IMPORT
+// IMPORT multer (node.js middleware that allows to handle incoming files in HTTP requests)
 const multer = require('multer');
 
 // MIME types dictionary 

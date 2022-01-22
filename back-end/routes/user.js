@@ -9,8 +9,8 @@ const userCtrl = require('../controllers/user');
 const rateLimit = require('../middleware/rate-limit');
 
 // CREATION OF ROUTES
-router.post('/signup', rateLimit.limiter, userCtrl.signup);  
-router.post('/login', rateLimit.limiter, userCtrl.login);
+router.post('/signup', rateLimit.limiter, userCtrl.signup); // Creates an account for a new user 
+router.post('/login', rateLimit.limiter, userCtrl.login);  // Connects a pre-existing user
 
 // Export the router (So it can be imported in app.js)
 module.exports = router;

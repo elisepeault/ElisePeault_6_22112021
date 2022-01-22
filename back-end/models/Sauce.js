@@ -1,4 +1,4 @@
-// IMPORT
+// IMPORT Mongoose
 const mongoose = require('mongoose');
 
 // Create a sauce's schema (No need to put a field for the Id since it is generated automatically by Mongoose)

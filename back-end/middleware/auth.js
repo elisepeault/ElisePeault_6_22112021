@@ -1,6 +1,6 @@
 // IMPORT jsonwebtoken package
 const jwt = require('jsonwebtoken');
-
+// IMPORT the module that loads environment variables
 require('dotenv').config();
 
 // Middleware which will protect the selected routes and verify that the user is authenticated before authorizing the sending of his requests.

@@ -10,12 +10,12 @@ const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config');
 
 // CREATION OF ROUTES
-router.get('/', auth, sauceCtrl.getAllSauces); // Display all the sauces objects 
-router.get('/:id', auth, sauceCtrl.getOneSauce); // Get the details of one sauce (based on its id)
-router.post('/', auth, multer, sauceCtrl.createSauce); // Create a sauce object
-router.put('/:id', auth, multer, sauceCtrl.modifySauce);  // Modify an existing sauce object
-router.delete('/:id', auth, sauceCtrl.deleteSauce);  // Delete a sauce object
-router.post('/:id/like', auth, sauceCtrl.updateLikesDislikes); // Define the "like/dislike" status for a specific userId
+router.get('/', auth, sauceCtrl.getAllSauces); // Displays all the sauces objects 
+router.get('/:id', auth, sauceCtrl.getOneSauce); // Gets the details of one sauce (based on its id)
+router.post('/', auth, multer, sauceCtrl.createSauce); // Creates a sauce object
+router.put('/:id', auth, multer, sauceCtrl.modifySauce);  // Modifies an existing sauce object
+router.delete('/:id', auth, sauceCtrl.deleteSauce);  // Deletes a sauce object
+router.post('/:id/like', auth, sauceCtrl.updateLikesDislikes); // Defines the "like/dislike" status for a specific userId
 
 
 // Export the router (So it can be imported in app.js)
