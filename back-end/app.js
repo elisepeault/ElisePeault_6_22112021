@@ -24,7 +24,7 @@ mongoose.connect( process.env.SECRET_MONGODB,
 
 // REQUESTS's RESPONSES
 
-// General Middleware => CORS
+// General Middleware => CORS (allows a user to access resources from a server located on another origin than the current site)
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');

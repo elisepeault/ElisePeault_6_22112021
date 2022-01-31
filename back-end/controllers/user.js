@@ -28,12 +28,12 @@ exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email})
         .then( user => {     // check if a user is found
             if (!user) {     // If no user is found
-                return res.status(401).json({ error: 'User not found !'});
+                return res.status(400).json({ error: 'User not found !'});
             }         
             bcrypt.compare(req.body.password, user.password) // If we find a user => we compare the password (in the request) with the hash saved in the database 
                 .then(valid => {
                     if(!valid) {
-                        return res.status(401).json({ error: 'Incorrect password !'});
+                        return res.status(400).json({ error: 'Incorrect password !'});
                     }
                     res.status(200).json({
                         userId: user._id,
